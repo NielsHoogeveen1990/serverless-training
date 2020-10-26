@@ -1,0 +1,50 @@
+service: heart-disease-training
+
+provider:
+  name: aws
+  runtime: python3.7
+  stage: dev
+  region: eu-central-1
+
+# you can add packaging information here
+package:
+  exclude:
+    - node_modules/**
+    - venv/**
+    - download_model.py
+    - delete_model.py
+    - README.md
+
+functions:
+  predict-heartdisease:
+    handler: handler.predict
+    memorySize: 512
+    timeout: 30
+    events:
+      - http:
+          path: get-disease
+          method: get
+          request:
+            parameters: # specify the parameters for the GET request
+               queryStrings:
+                 name: true
+                 sex: true
+                 cp: true
+                 trestbps: true
+                 chol: true
+                 fbs: true
+                 restecg: true
+                 thalach: true
+                 exang: true
+                 oldpeak: true
+                 slope: true
+                 ca: true
+                 thal: true
+
+plugins:
+  - serverless-python-requirements
+
+custom:
+  pythonRequirements:
+    dockerizePip: true
+    slim: true

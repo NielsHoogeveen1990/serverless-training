@@ -1,0 +1,6 @@
+sklearn
+boto3
+joblib
+pandas
+configparser
+git+https://github.com/NielsHoogeveen1990/Heartdisease-predictor.git#egg=heart-disease
