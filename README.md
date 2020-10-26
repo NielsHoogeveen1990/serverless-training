@@ -21,3 +21,15 @@ $ python download_model.py && sls deploy && python delete_model.py
 ```
 This combined bash command will first download the ML model locally,
 then it will load the model in the handler.py file, and finally it will delete it locally.
+
+## Need help with debugging?
+Serverless gives little feedback at first sight.
+In order to debug a failed deployment, set SLS_DEBUG to True
+```
+$ export SLS_DEBUG=true
+```
+However, when you get a 502 for example when testing the API, you can also ask
+Serverless for the logs with the following bash command (after testing):
+```
+$ serverless logs -f [yourfunction] -s dev
+```
